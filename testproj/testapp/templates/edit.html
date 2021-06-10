@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Stock</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Edit portfolio {{ show.id }}</h1>
+    <form action="/shows/{{ show.id }}/update" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Stock</label>
+            <input type="text" name="title" id="title" class="form-control" value="{{ show.title}}">
+        </div>
+        <div class="form-group">
+            <label for="network">Shares</label>
+            <input type="text" name="network" id="network" class="form-control" value="{{ show.network}}">
+        </div>
+        <div class="form-group">
+            <label for="release_date">Purchase Date</label>
+            <input type="date" name="release_date" id="release_date" class="form-control" value="{{ show.release_date|date:'Y-m-d'}}">
+        </div>
+        <div class="form-group">
+            <label for="description">Notes: (Method, Bull/Bear purchase, profit hold time</label>
+            <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ show.description}}</textarea>
+        </div>
+        <button class="btn btn-primary">Update</button>
+        <button class="btn btn-warning"><a href="/shows/{{ show.id }}">Go to show</a></button>
+    
+    </form>
+</body>
+</html>
